@@ -1,0 +1,101 @@
+{
+  "study_trials": [
+    {
+      "id": "FS_NR_07",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_07.png",
+      "meaning": "stimuli/meanings/FS_NR_7.png",
+      "audio": "stimuli/pronunciations/FS_NR_7.wav",
+      "definition": "A grain of rice"
+    },
+    {
+      "id": "MS_R_09",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_09.png",
+      "meaning": "stimuli/meanings/MS_R_9.png",
+      "audio": "stimuli/pronunciations/MS_R_9.wav",
+      "definition": "A dry root"
+    },
+    {
+      "id": "MS_NR_08",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_08.png",
+      "meaning": "stimuli/meanings/MS_NR_8.png",
+      "audio": "stimuli/pronunciations/MS_NR_8.wav",
+      "definition": "To bow"
+    },
+    {
+      "id": "MS_NR_07",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_07.png",
+      "meaning": "stimuli/meanings/MS_NR_7.png",
+      "audio": "stimuli/pronunciations/MS_NR_7.wav",
+      "definition": "A drop of rain"
+    },
+    {
+      "id": "FS_R_08",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_08.png",
+      "meaning": "stimuli/meanings/FS_R_8.png",
+      "audio": "stimuli/pronunciations/FS_R_8.wav",
+      "definition": "A warehouse"
+    },
+    {
+      "id": "FS_R_07",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_07.png",
+      "meaning": "stimuli/meanings/FS_R_7.png",
+      "audio": "stimuli/pronunciations/FS_R_7.wav",
+      "definition": "An ancestor"
+    },
+    {
+      "id": "MS_R_07",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_07.png",
+      "meaning": "stimuli/meanings/MS_R_7.png",
+      "audio": "stimuli/pronunciations/MS_R_7.wav",
+      "definition": "A walking stick"
+    },
+    {
+      "id": "FS_NR_09",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_09.png",
+      "meaning": "stimuli/meanings/FS_NR_9.png",
+      "audio": "stimuli/pronunciations/FS_NR_9.wav",
+      "definition": "A sharp sword"
+    },
+    {
+      "id": "MS_R_08",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_08.png",
+      "meaning": "stimuli/meanings/MS_R_8.png",
+      "audio": "stimuli/pronunciations/MS_R_8.wav",
+      "definition": "A safe shelter"
+    },
+    {
+      "id": "FS_NR_08",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_08.png",
+      "meaning": "stimuli/meanings/FS_NR_8.png",
+      "audio": "stimuli/pronunciations/FS_NR_8.wav",
+      "definition": "To kneel"
+    },
+    {
+      "id": "FS_R_09",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_09.png",
+      "meaning": "stimuli/meanings/FS_R_9.png",
+      "audio": "stimuli/pronunciations/FS_R_9.wav",
+      "definition": "A bitter herb"
+    },
+    {
+      "id": "MS_NR_09",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_09.png",
+      "meaning": "stimuli/meanings/MS_NR_9.png",
+      "audio": "stimuli/pronunciations/MS_NR_9.wav",
+      "definition": "A thick book"
+    }
+  ],
+  "radical_trials": []
+}

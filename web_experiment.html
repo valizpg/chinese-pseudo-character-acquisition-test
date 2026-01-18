@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chinese Pseudo-character Experiment</title>
+    <!-- 引入 jsPsych 和相关插件 (使用 CDN 加速) -->
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f0f0f0; }
+        .jspsych-content { max-width: 900px; }
+        .study-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .char-img { width: 300px; height: 300px; object-fit: contain; border: 1px solid #eee; justify-self: center; }
+        .meaning-img { width: 300px; height: 300px; object-fit: contain; border: 1px solid #eee; justify-self: center; }
+        .definition-text { 
+            grid-column: 1 / -1; 
+            font-size: 24px; 
+            text-align: center; 
+            margin-top: 20px; 
+            color: #333;
+        }
+        .audio-control {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .speaker-icon {
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .speaker-icon:active { transform: scale(0.95); }
+        
+        /* Test Phase Styles */
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .test-target { width: 200px; height: 200px; margin-bottom: 30px; }
+        .choices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .choice-item {
+            width: 200px; height: 200px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .choice-item:hover { border-color: #007bff; }
+    </style>
+</head>
+<body></body>
+<script>
+    // 初始化 jsPsych
+    const jsPsych = initJsPsych({
+        on_finish: function() {
+            // --- Custom Data Formatting and Saving ---
+            const trials = jsPsych.data.get().filter([{phase: 'test'}, {phase: 'radical'}]);
+            
+            const header = "Participant_ID,Experiment_Phase,Session,Trial_ID,Condition,Accuracy";
+            
+            const rows = trials.trials.map((trial, index) => {
+                const participant_id = trial.participant_id;
+                let experiment_phase = '';
+                let session = trial.session;
+                let trial_id = trial.stim_id;
+                let condition = trial.condition;
+                const accuracy = trial.correct ? 1 : 0;
+
+                if (trial.phase === 'radical') {
+                    experiment_phase = 'Radical_Awareness';
+                    session = 'Post_Test'; // As per example
+                    trial_id = `RA_${index + 1}`; // As per example
+                    condition = 'Radical_Test'; // As per example
+                } else if (trial.phase === 'test') {
+                    experiment_phase = 'Character_Acquisition';
+                }
+                
+                return [participant_id, experiment_phase, session, trial_id, condition, accuracy].join(',');
+            });
+
+            const csvData = [header, ...rows].join('\n');
+            const filename = `subject_${subject_id}_session_${session_num}.csv`;
+
+            fetch('/save_data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({csv_data: csvData, filename: filename})
+            }).then(() => {
+                document.body.innerHTML = `
+                    <div style="text-align:center; margin-top:100px; font-size: 20px;">
+                        <h1>实验结束</h1>
+                        <p>数据已保存！您可以关闭此窗口。<br>文件名 (Filename): ${filename}</p>
+                        <hr>
+                        <h1>Experiment Finished</h1>
+                        <p>Data has been saved! You may now close this window.</p>
+                    </div>`;
+            });
+        }
+    });
+
+    let subject_id = '';
+    let session_num = 1;
+    let timeline = [];
+
+    // --- 1. 欢迎与信息收集 ---
+    const welcome = {
+        type: jsPsychSurveyText,
+        questions: [
+            {prompt: "请输入被试编号 (Participant ID):", name: 'id', required: true},
+            {prompt: "请输入实验阶段 (Session 1-4, 或输入 'radical'):", name: 'session', required: true, placeholder: "1"}
+        ],
+        on_finish: function(data){
+            const responses = data.response;
+            subject_id = responses.id;
+            session_num = responses.session; // Store as string to allow 'radical'
+            jsPsych.data.addProperties({participant_id: subject_id, session: session_num});
+        }
+    };
+    timeline.push(welcome);
+
+    // --- 2. 加载数据与构建流程 (异步) ---
+    const load_and_run = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>正在加载实验资源...<br>Loading experiment resources...</p>',
+        choices: [],
+        on_load: function() {
+            fetch('/init_data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({session: session_num})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.error) {
+                    alert(data.error);
+                    return;
+                }
+                buildExperiment(data.study_trials, data.radical_trials);
+            });
+        }
+    };
+    timeline.push(load_and_run);
+
+    function buildExperiment(studyTrials, radicalTrials) {
+        const mainTimeline = [];
+
+        // --- 预加载资源 ---
+        const images_to_preload = [];
+        const audio_to_preload = [];
+        
+        // 添加喇叭图标
+        images_to_preload.push('/stimuli/speaker_icon.png');
+
+        if (session_num === 'radical') {
+            // --- 部件意识任务 (单独流程) ---
+            if (!radicalTrials || radicalTrials.length === 0) {
+                mainTimeline.push({
+                    type: jsPsychHtmlKeyboardResponse,
+                    stimulus: `<p style='color:red;'>错误：未找到部件意识任务的材料。</p><p>按空格键退出。</p>`,
+                    choices: [' ']
+                });
+                jsPsych.run(mainTimeline);
+                return;
+            }
+            
+            radicalTrials.forEach(t => {
+                images_to_preload.push(t.left_image);
+                images_to_preload.push(t.right_image);
+            });
+
+            mainTimeline.push({
+                type: jsPsychPreload,
+                images: images_to_preload,
+                message: '<p>资源加载完成。<br>Assets loaded.</p>'
+            });
+
+            // 指导语
+            mainTimeline.push({
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: `
+                    <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <h3>任务：判断哪个字更像真实汉字。</h3>
+                    <p>屏幕左右会各出现一个字，请判断哪一个更像真实的汉字。</p>
+                    <p>如果认为左边的更像，请按【左箭头】。</p>
+                    <p>如果认为右边的更像，请按【右箭头】。</p>
+                    <p>请根据您的第一直觉快速作答。</p>
+                    <p>按【空格键】开始。</p>
+                    <hr>
+                    <h3>Task: Judge which character looks more like a real Chinese character.</h3>
+                    <p>A character will appear on the left and right side of the screen. Please decide which one looks more like a real Chinese character.</p>
+                    <p>Press the [left arrow] if you think the one on the left is better.</p>
+                    <p>Press the [right arrow] if you think the one on the right is better.</p>
+                    <p>Please respond quickly based on your first impression.</p>
+                    <p>Press [space] to begin.</p>
+                    </div>`,
+                choices: [' ']
+            });
+
+            // 任务试次
+            radicalTrials.forEach((trial, index) => {
+                const radical_trial = {
+                    type: jsPsychHtmlKeyboardResponse,
+                    stimulus: `
+                        <div style="display:flex; justify-content:space-around; width:800px; margin:0 auto;">
+                            <div><img src="${trial.left_image}" style="width:300px;"></div>
+                            <div><img src="${trial.right_image}" style="width:300px;"></div>
+                        </div>
+                        <p style="font-size:24px; margin-top:30px;">哪一个更像真实的汉字?<br>Which one looks more like a real Chinese character?</p>
+                    `,
+                    choices: ['ArrowLeft', 'ArrowRight'],
+                    data: {
+                        phase: 'radical', 
+                        type: trial.type, 
+                        stim_id: `pair_${index+1}`, 
+                        left_image: trial.left_image,
+                        right_image: trial.right_image,
+                        left_char: trial.left_char,
+                        right_char: trial.right_char,
+                        correct_answer: trial.correct_answer
+                    },
+                    on_finish: function(data){
+                        const resp = data.response;
+                        let chosen_char = null;
+                        if (resp.toLowerCase() === 'arrowleft') {
+                            chosen_char = trial.left_char;
+                        } else if (resp.toLowerCase() === 'arrowright') {
+                            chosen_char = trial.right_char;
+                        }
+                        data.response_char = chosen_char;
+                        data.correct = (chosen_char === trial.correct_answer);
+                    }
+                };
+                mainTimeline.push(radical_trial);
+            });
+
+        } else {
+            // --- 学习与测试任务 ---
+            if (!studyTrials || studyTrials.length === 0) {
+                mainTimeline.push({
+                    type: jsPsychHtmlKeyboardResponse,
+                    stimulus: `<p style='color:red;'>错误：未找到当前 Session (${session_num}) 的学习材料。<br>请检查 Session 编号是否正确。</p><p>按空格键退出。</p>`,
+                    choices: [' ']
+                });
+                jsPsych.run(mainTimeline);
+                return;
+            }
+
+            studyTrials.forEach(t => {
+                images_to_preload.push(t.image);
+                images_to_preload.push(t.meaning);
+                audio_to_preload.push(t.audio);
+            });
+
+            mainTimeline.push({
+                type: jsPsychPreload,
+                images: images_to_preload,
+                audio: audio_to_preload,
+                message: '<p>资源加载完成。<br>Assets loaded.</p>'
+            });
+
+            // 指导语 1
+            mainTimeline.push({
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: `
+                    <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <h3>欢迎参加实验: 第 ${session_num} 阶段</h3>
+                    <p>您将学习12个新‘字’。<br>请仔细记忆每个‘字’对应的发音和含义。</p>
+                    <p>按【空格键】开始学习。</p>
+                    <hr>
+                    <h3>Welcome to the experiment: Session ${session_num}</h3>
+                    <p>You will learn 12 new 'characters'.<br>Please carefully memorize the pronunciation and meaning of each 'character'.</p>
+                    <p>Press [space] to start learning.</p>
+                    </div>`,
+                choices: [' ']
+            });
+
+            // 学习阶段
+            studyTrials.forEach(trial => {
+                const study_trial = {
+                    type: jsPsychHtmlKeyboardResponse, // Use keyboard response
+                    stimulus: `
+                        <div class="study-container">
+                            <img src="${trial.image}" class="char-img">
+                            <img src="${trial.meaning}" class="meaning-img">
+                            <div class="definition-text">${trial.definition}</div>
+                            <div class="audio-control">
+                                <img src="/stimuli/speaker_icon.png" class="speaker-icon" onclick="document.getElementById('audio-player')?.play()">
+                                <p style="font-size:12px; color:#666;">(点击喇叭或按 'P' 重播)<br>(Click speaker or press 'P' to replay)</p>
+                            </div>
+                            <audio id="audio-player" src="${trial.audio}" autoplay></audio>
+                        </div>
+                        <div id="countdown" style="text-align:center; font-size:18px; color: #555; margin-top: 15px;"></div>
+                        <div style="text-align:center; font-size:16px; color: #777; margin-top: 5px;">按【空格键】可提前翻页<br>Press [space] to continue early</div>
+                    `,
+                    choices: [' '],
+                    trial_duration: 50000,
+                    response_ends_trial: true,
+                    data: {phase: 'study', stim_id: trial.id, condition: trial.condition},
+                    on_load: function() {
+                        const trial_duration_ms = 50000;
+                        const countdown_element = document.getElementById('countdown');
+                        let remaining_seconds = trial_duration_ms / 1000;
+
+                        const replay_audio_handler = function(e) {
+                            if (e.key.toLowerCase() === 'p') {
+                                const audio = document.getElementById('audio-player');
+                                if (audio) { audio.currentTime = 0; audio.play(); }
+                            }
+                        };
+                        document.addEventListener('keydown', replay_audio_handler);
+                        
+                        const update_countdown = () => {
+                            if (countdown_element) {
+                                countdown_element.innerText = `剩余时间: ${Math.ceil(remaining_seconds)}秒 (Time remaining: ${Math.ceil(remaining_seconds)}s)`;
+                            }
+                            if(remaining_seconds < 0) { clearInterval(interval_id); }
+                            remaining_seconds--;
+                        };
+
+                        update_countdown();
+                        const interval_id = setInterval(update_countdown, 1000);
+
+                        jsPsych.getCurrentTrial().interval_id = interval_id;
+                        jsPsych.getCurrentTrial().replay_audio_handler = replay_audio_handler;
+                    },
+                    on_finish: function() {
+                        clearInterval(jsPsych.getCurrentTrial().interval_id);
+                        document.removeEventListener('keydown', jsPsych.getCurrentTrial().replay_audio_handler);
+                    }
+                };
+                mainTimeline.push(study_trial);
+            });
+
+            // 指导语 2
+            mainTimeline.push({
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: `
+                    <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <h3>学习阶段结束。</h3>
+                    <p>接下来是测试阶段。</p>
+                    <p>按【空格键】开始。</p>
+                    <hr>
+                    <h3>The study phase is over.</h3>
+                    <p>Next is the test phase.</p>
+                    <p>Press [space] to begin.</p>
+                    </div>`,
+                choices: [' ']
+            });
+
+            // 测试阶段 (4-AFC)
+            const testOrder = jsPsych.randomization.shuffle(studyTrials);
+            
+            testOrder.forEach(trial => {
+                const distractors = jsPsych.randomization.sampleWithoutReplacement(
+                    studyTrials.filter(t => t.id !== trial.id), 3
+                );
+                
+                let choices = [
+                    {src: trial.meaning, correct: true},
+                    {src: distractors[0].meaning, correct: false},
+                    {src: distractors[1].meaning, correct: false},
+                    {src: distractors[2].meaning, correct: false}
+                ];
+                choices = jsPsych.randomization.shuffle(choices);
+
+                const test_trial = {
+                    type: jsPsychHtmlButtonResponse,
+                    stimulus: `<div class="test-container"><img src="${trial.image}" class="test-target"></div>`,
+                    choices: choices.map(c => `<img src="${c.src}" class="choice-item">`),
+                    button_html: '<div class="jspsych-html-button-response-button" style="padding:0; border:none;">%choice%</div>',
+                    data: {phase: 'test', stim_id: trial.id, condition: trial.condition, correct_pos: choices.findIndex(c=>c.correct)},
+                    on_finish: function(data){
+                        const choiceIndex = data.response;
+                        data.correct = choices[choiceIndex].correct;
+                    }
+                };
+                mainTimeline.push(test_trial);
+            });
+        }
+
+        // --- 共同的结束语 ---
+        mainTimeline.push({
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                <h3>本阶段实验全部结束。</h3>
+                <p>感谢您的参与！</p>
+                <p>按【空格键】保存数据并退出。</p>
+                <hr>
+                <h3>This session of the experiment is now complete.</h3>
+                <p>Thank you for your participation!</p>
+                <p>Press [space] to save data and exit.</p>
+                </div>`,
+            choices: [' ']
+        });
+
+        jsPsych.run(mainTimeline);
+    }
+
+    // 启动初始加载
+    jsPsych.run(timeline);
+
+</script>
+</html>

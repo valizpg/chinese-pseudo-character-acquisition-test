@@ -1,0 +1,85 @@
+{
+  "study_trials": [],
+  "radical_trials": [
+    {
+      "type": "pos",
+      "left_image": "stimuli/radical_awareness/pos_reg_A_1.png",
+      "right_image": "stimuli/radical_awareness/pos_reg_B_1.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "pos",
+      "left_image": "stimuli/radical_awareness/pos_reg_A_5.png",
+      "right_image": "stimuli/radical_awareness/pos_reg_B_5.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "form",
+      "left_image": "stimuli/radical_awareness/form_reg_B_3.png",
+      "right_image": "stimuli/radical_awareness/form_reg_A_3.png",
+      "left_char": "B",
+      "right_char": "A",
+      "correct_answer": "A"
+    },
+    {
+      "type": "pos",
+      "left_image": "stimuli/radical_awareness/pos_reg_B_2.png",
+      "right_image": "stimuli/radical_awareness/pos_reg_A_2.png",
+      "left_char": "B",
+      "right_char": "A",
+      "correct_answer": "A"
+    },
+    {
+      "type": "form",
+      "left_image": "stimuli/radical_awareness/form_reg_A_4.png",
+      "right_image": "stimuli/radical_awareness/form_reg_B_4.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "form",
+      "left_image": "stimuli/radical_awareness/form_reg_B_5.png",
+      "right_image": "stimuli/radical_awareness/form_reg_A_5.png",
+      "left_char": "B",
+      "right_char": "A",
+      "correct_answer": "A"
+    },
+    {
+      "type": "form",
+      "left_image": "stimuli/radical_awareness/form_reg_A_2.png",
+      "right_image": "stimuli/radical_awareness/form_reg_B_2.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "pos",
+      "left_image": "stimuli/radical_awareness/pos_reg_A_4.png",
+      "right_image": "stimuli/radical_awareness/pos_reg_B_4.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "form",
+      "left_image": "stimuli/radical_awareness/form_reg_A_1.png",
+      "right_image": "stimuli/radical_awareness/form_reg_B_1.png",
+      "left_char": "A",
+      "right_char": "B",
+      "correct_answer": "A"
+    },
+    {
+      "type": "pos",
+      "left_image": "stimuli/radical_awareness/pos_reg_B_3.png",
+      "right_image": "stimuli/radical_awareness/pos_reg_A_3.png",
+      "left_char": "B",
+      "right_char": "A",
+      "correct_answer": "A"
+    }
+  ]
+}

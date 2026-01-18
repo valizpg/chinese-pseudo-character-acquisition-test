@@ -1,0 +1,101 @@
+{
+  "study_trials": [
+    {
+      "id": "FS_R_01",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_01.png",
+      "meaning": "stimuli/meanings/FS_R_1.png",
+      "audio": "stimuli/pronunciations/FS_R_1.wav",
+      "definition": "To whisper"
+    },
+    {
+      "id": "FS_NR_01",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_01.png",
+      "meaning": "stimuli/meanings/FS_NR_1.png",
+      "audio": "stimuli/pronunciations/FS_NR_1.wav",
+      "definition": "To lift"
+    },
+    {
+      "id": "MS_R_01",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_01.png",
+      "meaning": "stimuli/meanings/MS_R_1.png",
+      "audio": "stimuli/pronunciations/MS_R_1.wav",
+      "definition": "To argue"
+    },
+    {
+      "id": "MS_NR_01",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_01.png",
+      "meaning": "stimuli/meanings/MS_NR_1.png",
+      "audio": "stimuli/pronunciations/MS_NR_1.wav",
+      "definition": "A bamboo basket"
+    },
+    {
+      "id": "FS_R_03",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_03.png",
+      "meaning": "stimuli/meanings/FS_R_3.png",
+      "audio": "stimuli/pronunciations/FS_R_3.wav",
+      "definition": "A guest"
+    },
+    {
+      "id": "FS_NR_02",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_02.png",
+      "meaning": "stimuli/meanings/FS_NR_2.png",
+      "audio": "stimuli/pronunciations/FS_NR_2.wav",
+      "definition": "A clay pot"
+    },
+    {
+      "id": "FS_R_02",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_02.png",
+      "meaning": "stimuli/meanings/FS_R_2.png",
+      "audio": "stimuli/pronunciations/FS_R_2.wav",
+      "definition": "A shallow pond"
+    },
+    {
+      "id": "MS_NR_03",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_03.png",
+      "meaning": "stimuli/meanings/MS_NR_3.png",
+      "audio": "stimuli/pronunciations/MS_NR_3.wav",
+      "definition": "A dark cave"
+    },
+    {
+      "id": "MS_NR_02",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_02.png",
+      "meaning": "stimuli/meanings/MS_NR_2.png",
+      "audio": "stimuli/pronunciations/MS_NR_2.wav",
+      "definition": "To fish"
+    },
+    {
+      "id": "MS_R_02",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_02.png",
+      "meaning": "stimuli/meanings/MS_R_2.png",
+      "audio": "stimuli/pronunciations/MS_R_2.wav",
+      "definition": "To overflow"
+    },
+    {
+      "id": "MS_R_03",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_03.png",
+      "meaning": "stimuli/meanings/MS_R_3.png",
+      "audio": "stimuli/pronunciations/MS_R_3.wav",
+      "definition": "A neighbor"
+    },
+    {
+      "id": "FS_NR_03",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_03.png",
+      "meaning": "stimuli/meanings/FS_NR_3.png",
+      "audio": "stimuli/pronunciations/FS_NR_3.wav",
+      "definition": "The morning sun"
+    }
+  ],
+  "radical_trials": []
+}

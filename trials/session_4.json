@@ -1,0 +1,101 @@
+{
+  "study_trials": [
+    {
+      "id": "MS_NR_12",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_12.png",
+      "meaning": "stimuli/meanings/MS_NR_12.png",
+      "audio": "stimuli/pronunciations/MS_NR_12.wav",
+      "definition": "To paint"
+    },
+    {
+      "id": "FS_NR_10",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_10.png",
+      "meaning": "stimuli/meanings/FS_NR_10.png",
+      "audio": "stimuli/pronunciations/FS_NR_10.wav",
+      "definition": "To smell"
+    },
+    {
+      "id": "MS_R_11",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_11.png",
+      "meaning": "stimuli/meanings/MS_R_11.png",
+      "audio": "stimuli/pronunciations/MS_R_11.wav",
+      "definition": "A secret entrance"
+    },
+    {
+      "id": "MS_R_12",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_12.png",
+      "meaning": "stimuli/meanings/MS_R_12.png",
+      "audio": "stimuli/pronunciations/MS_R_12.wav",
+      "definition": "A painful itch"
+    },
+    {
+      "id": "FS_R_11",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_11.png",
+      "meaning": "stimuli/meanings/FS_R_11.png",
+      "audio": "stimuli/pronunciations/FS_R_11.wav",
+      "definition": "To lock"
+    },
+    {
+      "id": "FS_NR_11",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_11.png",
+      "meaning": "stimuli/meanings/FS_NR_11.png",
+      "audio": "stimuli/pronunciations/FS_NR_11.wav",
+      "definition": "A golden ring"
+    },
+    {
+      "id": "FS_NR_12",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_12.png",
+      "meaning": "stimuli/meanings/FS_NR_12.png",
+      "audio": "stimuli/pronunciations/FS_NR_12.wav",
+      "definition": "To measure"
+    },
+    {
+      "id": "MS_NR_10",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_10.png",
+      "meaning": "stimuli/meanings/MS_NR_10.png",
+      "audio": "stimuli/pronunciations/MS_NR_10.wav",
+      "definition": "To drink"
+    },
+    {
+      "id": "MS_NR_11",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_11.png",
+      "meaning": "stimuli/meanings/MS_NR_11.png",
+      "audio": "stimuli/pronunciations/MS_NR_11.wav",
+      "definition": "A silver coin"
+    },
+    {
+      "id": "MS_R_10",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_10.png",
+      "meaning": "stimuli/meanings/MS_R_10.png",
+      "audio": "stimuli/pronunciations/MS_R_10.wav",
+      "definition": "To roast"
+    },
+    {
+      "id": "FS_R_12",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_12.png",
+      "meaning": "stimuli/meanings/FS_R_12.png",
+      "audio": "stimuli/pronunciations/FS_R_12.wav",
+      "definition": "A high fever"
+    },
+    {
+      "id": "FS_R_10",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_10.png",
+      "meaning": "stimuli/meanings/FS_R_10.png",
+      "audio": "stimuli/pronunciations/FS_R_10.wav",
+      "definition": "To boil"
+    }
+  ],
+  "radical_trials": []
+}

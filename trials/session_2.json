@@ -1,0 +1,101 @@
+{
+  "study_trials": [
+    {
+      "id": "FS_R_06",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_06.png",
+      "meaning": "stimuli/meanings/FS_R_6.png",
+      "audio": "stimuli/pronunciations/FS_R_6.wav",
+      "definition": "A sharp nail"
+    },
+    {
+      "id": "MS_R_05",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_05.png",
+      "meaning": "stimuli/meanings/MS_R_5.png",
+      "audio": "stimuli/pronunciations/MS_R_5.wav",
+      "definition": "A hip bone"
+    },
+    {
+      "id": "MS_R_06",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_06.png",
+      "meaning": "stimuli/meanings/MS_R_6.png",
+      "audio": "stimuli/pronunciations/MS_R_6.wav",
+      "definition": "A heavy chain"
+    },
+    {
+      "id": "MS_NR_05",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_05.png",
+      "meaning": "stimuli/meanings/MS_NR_5.png",
+      "audio": "stimuli/pronunciations/MS_NR_5.wav",
+      "definition": "An angry dog"
+    },
+    {
+      "id": "MS_R_04",
+      "condition": "MS_R",
+      "image": "stimuli/images/MS_R_04.png",
+      "meaning": "stimuli/meanings/MS_R_4.png",
+      "audio": "stimuli/pronunciations/MS_R_4.wav",
+      "definition": "A spotted cat"
+    },
+    {
+      "id": "FS_NR_06",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_06.png",
+      "meaning": "stimuli/meanings/FS_NR_6.png",
+      "audio": "stimuli/pronunciations/FS_NR_6.wav",
+      "definition": "To sweep"
+    },
+    {
+      "id": "MS_NR_04",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_04.png",
+      "meaning": "stimuli/meanings/MS_NR_4.png",
+      "audio": "stimuli/pronunciations/MS_NR_4.wav",
+      "definition": "A silk robe"
+    },
+    {
+      "id": "FS_NR_05",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_05.png",
+      "meaning": "stimuli/meanings/FS_NR_5.png",
+      "audio": "stimuli/pronunciations/FS_NR_5.wav",
+      "definition": "A crying baby"
+    },
+    {
+      "id": "FS_R_04",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_04.png",
+      "meaning": "stimuli/meanings/FS_R_4.png",
+      "audio": "stimuli/pronunciations/FS_R_4.wav",
+      "definition": "A wild wolf"
+    },
+    {
+      "id": "FS_NR_04",
+      "condition": "FS_NR",
+      "image": "stimuli/images/FS_NR_04.png",
+      "meaning": "stimuli/meanings/FS_NR_4.png",
+      "audio": "stimuli/pronunciations/FS_NR_4.wav",
+      "definition": "To weave"
+    },
+    {
+      "id": "MS_NR_06",
+      "condition": "MS_NR",
+      "image": "stimuli/images/MS_NR_06.png",
+      "meaning": "stimuli/meanings/MS_NR_6.png",
+      "audio": "stimuli/pronunciations/MS_NR_6.wav",
+      "definition": "A straw mat"
+    },
+    {
+      "id": "FS_R_05",
+      "condition": "FS_R",
+      "image": "stimuli/images/FS_R_05.png",
+      "meaning": "stimuli/meanings/FS_R_5.png",
+      "audio": "stimuli/pronunciations/FS_R_5.wav",
+      "definition": "A strong muscle"
+    }
+  ],
+  "radical_trials": []
+}
